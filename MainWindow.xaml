@@ -1,0 +1,84 @@
+<Window x:Class="FeasaWpfDemo.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Feasa LED Analyser — WPF Demo" Height="640" Width="920"
+        WindowStartupLocation="CenterScreen"
+        Closing="Window_Closing">
+
+    <Grid Margin="14">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Connection bar -->
+        <Border Grid.Row="0" BorderBrush="#CCCCCC" BorderThickness="1" Padding="12" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <TextBlock Text="Port" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBox x:Name="PortTextBox" Width="90" Text="auto" VerticalAlignment="Center" Margin="0,0,20,0"
+                         ToolTip="A COM port name (e.g. COM7), or 'auto' to let the library find it"/>
+
+                <TextBlock Text="Baud" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBox x:Name="BaudTextBox" Width="70" Text="57600" VerticalAlignment="Center" Margin="0,0,20,0"/>
+
+                <Button x:Name="ConnectButton" Content="Connect" Width="110" Height="28"
+                        Click="ConnectButton_Click" Margin="0,0,20,0"/>
+
+                <Ellipse x:Name="StatusDot" Width="12" Height="12" Fill="#C0392B" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <TextBlock x:Name="StatusText" Text="Disconnected" VerticalAlignment="Center" FontWeight="SemiBold"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Measurement controls -->
+        <Border Grid.Row="1" BorderBrush="#CCCCCC" BorderThickness="1" Padding="12" Margin="0,0,0,10">
+            <StackPanel Orientation="Horizontal">
+                <Button x:Name="CaptureButton" Content="Capture" Width="110" Height="28"
+                        Click="CaptureButton_Click" IsEnabled="False" Margin="0,0,20,0"
+                        ToolTip="Triggers the analyser to take a new measurement"/>
+
+                <TextBlock Text="Measurement" VerticalAlignment="Center" Margin="0,0,6,0"/>
+                <ComboBox x:Name="MeasurementCombo" Width="170" SelectedIndex="0" Margin="0,0,20,0">
+                    <ComboBoxItem Content="All measurements"/>
+                    <ComboBoxItem Content="RGBI"/>
+                    <ComboBoxItem Content="HSI"/>
+                    <ComboBoxItem Content="xy"/>
+                    <ComboBoxItem Content="xyi"/>
+                    <ComboBoxItem Content="CCT"/>
+                    <ComboBoxItem Content="UV"/>
+                    <ComboBoxItem Content="CIE XYZ"/>
+                    <ComboBoxItem Content="Wavelength + Intensity"/>
+                    <ComboBoxItem Content="WSI"/>
+                    <ComboBoxItem Content="Signal level"/>
+                    <ComboBoxItem Content="Wavelength"/>
+                    <ComboBoxItem Content="Intensity"/>
+                    <ComboBoxItem Content="Absolute intensity"/>
+                </ComboBox>
+
+                <Button x:Name="ReadButton" Content="Read" Width="110" Height="28"
+                        Click="ReadButton_Click" IsEnabled="False" Margin="0,0,20,0"/>
+
+                <Button x:Name="ClearButton" Content="Clear results" Width="110" Height="28"
+                        Click="ClearButton_Click"/>
+            </StackPanel>
+        </Border>
+
+        <!-- Results and log -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <GroupBox Grid.Column="0" Header="Readings" Margin="0,0,6,0">
+                <ListBox x:Name="ReadingsListBox" FontFamily="Consolas" FontSize="12"/>
+            </GroupBox>
+
+            <GroupBox Grid.Column="1" Header="Connection log" Margin="6,0,0,0">
+                <TextBox x:Name="LogTextBox" IsReadOnly="True" TextWrapping="NoWrap"
+                         VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Auto"
+                         FontFamily="Consolas" FontSize="12" Background="#1E1E1E" Foreground="#DCDCDC"/>
+            </GroupBox>
+        </Grid>
+    </Grid>
+</Window>
