@@ -20,7 +20,7 @@ in this repo — just a client of it.
 ## Running it
 
 ```
-git clone https://github.com/YOUR_GITHUB_USERNAME/feasa-wpf-demo.git
+git clone https://github.com/savrcbl/feasa-wpf-demo.git
 cd feasa-wpf-demo
 dotnet run
 ```
